@@ -1,4 +1,0 @@
-
-<?php
-define('TG_BOT_TOKEN', '8101136085:AAHNaOp0SWxTJBBo-FpGRDrxuBUKAhf-9R4');
-define('TG_CHAT_ID', '593216853');
