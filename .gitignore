@@ -1,4 +1,20 @@
-secure/
+# Зависимости и сборка
+node_modules/
+npm-debug.log*
+*.log
+
+# Секреты и локальные настройки — никогда не коммитить
 .env
+.env.*
+secure/
+*.pem
+*.key
+
+# Netlify CLI (ID сайта, локальное состояние)
 .netlify/
+
+# Системные файлы
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
