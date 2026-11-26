@@ -14,17 +14,33 @@
         return n;
     };
 
-    /* ---------- Разбивка текста на маски ---------- */
+    /* ---------- Разбивка текста на маски ----------
+       Строим DOM-узлы, а не HTML-строку: текст не интерпретируется как разметка,
+       а CSS-переменная задаётся через CSSOM (совместимо со строгим CSP). */
+    const maskSpan = (text, index) => {
+        const mask = document.createElement('span');
+        mask.className = 'fx-mask';
+        mask.setAttribute('aria-hidden', 'true');
+        const inner = document.createElement('span');
+        inner.className = 'fx-char';
+        inner.style.setProperty('--i', index);
+        inner.textContent = text;
+        mask.appendChild(inner);
+        return mask;
+    };
+
     const splitChars = (node, outlineWordIndex = -1) => {
         const text = node.textContent.trim();
         node.setAttribute('aria-label', text);
+        node.textContent = '';
         let i = 0;
-        node.innerHTML = text.split(/\s+/).map((word, w) => {
-            const chars = [...word].map(ch =>
-                `<span class="fx-mask" aria-hidden="true"><span class="fx-char" style="--i:${i++}">${ch}</span></span>`
-            ).join('');
-            return `<span class="fx-word${w === outlineWordIndex ? ' fx-outline' : ''}">${chars}</span>`;
-        }).join(' ');
+        text.split(/\s+/).forEach((word, w) => {
+            if (w) node.appendChild(document.createTextNode(' '));
+            const wordEl = document.createElement('span');
+            wordEl.className = 'fx-word' + (w === outlineWordIndex ? ' fx-outline' : '');
+            [...word].forEach(ch => wordEl.appendChild(maskSpan(ch, i++)));
+            node.appendChild(wordEl);
+        });
         return text;
     };
 
@@ -32,9 +48,11 @@
         const text = node.textContent.trim();
         node.setAttribute('aria-label', text);
         node.classList.add('fx-words');
-        node.innerHTML = text.split(/\s+/).map((word, i) =>
-            `<span class="fx-mask" aria-hidden="true"><span class="fx-char" style="--i:${i * 2}">${word}</span></span>`
-        ).join(' ');
+        node.textContent = '';
+        text.split(/\s+/).forEach((word, i) => {
+            if (i) node.appendChild(document.createTextNode(' '));
+            node.appendChild(maskSpan(word, i * 2));
+        });
     };
 
     /* ---------- Прелоадер: счётчик 0 → 100 ---------- */
@@ -130,8 +148,9 @@
     if (contacts) {
         const label = (openBtn ? openBtn.textContent.trim() : 'Order') + ' • iPhone 14 Pro • ';
         const badge = el('div', 'fx-badge',
-            `<svg viewBox="0 0 120 120"><defs><path id="fx-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>` +
-            `<text><textPath href="#fx-circle">${label}${label}</textPath></text></svg><span>↗</span>`);
+            '<svg viewBox="0 0 120 120"><defs><path id="fx-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>' +
+            '<text><textPath href="#fx-circle"></textPath></text></svg><span>↗</span>');
+        badge.querySelector('textPath').textContent = label + label;
         badge.setAttribute('role', 'button');
         badge.setAttribute('aria-label', label);
         badge.addEventListener('click', () => openBtn && openBtn.click());

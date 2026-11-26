@@ -1064,6 +1064,20 @@ body::after {
     transform: none;
 }
 
+/* Исправление: базовый style.css растягивал тост на весь экран (100% × 100%),
+   он перекрывал страницу и блокировал клики. Теперь — компактная плашка. */
+.success-popup {
+    width: auto;
+    height: auto;
+    max-width: calc(100vw - 40px);
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.success-popup p {
+    margin: 0;
+}
+
 /* ---------- Мобильная версия ---------- */
 @media (max-width: 1100px) {
     .color-list {
@@ -1255,4 +1269,77 @@ body::after {
     letter-spacing: .04em;
     color: var(--muted);
     text-align: center;
+}
+
+/* ---------- Уведомление «демо-проект» над шапкой ---------- */
+.demo-notice {
+    position: relative;
+    z-index: 21;
+    background: var(--bg-2);
+    color: var(--fg);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+}
+
+.demo-notice__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.demo-notice__tag {
+    flex: none;
+    padding: 4px 8px;
+    background: var(--acid);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.demo-notice__text {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--muted);
+}
+
+.demo-notice__text strong {
+    font-weight: 500;
+    color: var(--fg);
+}
+
+@media (max-width: 640px) {
+    .demo-notice__inner {
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .demo-notice__tag {
+        margin-top: 2px;
+    }
+
+    .demo-notice__text {
+        font-size: 11px;
+    }
+}
+
+/* Подпись автора в подвале на месте бывшего телефона — не ссылка */
+.footer-credit {
+    cursor: default;
+}
+
+.footer-credit::after {
+    display: none;
+}
+
+.footer-credit:hover {
+    color: var(--fg);
 }

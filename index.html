@@ -9,11 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Onest:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" href="css/animations.css">
-    <meta name="description" content="Незалежний магазин техніки: iPhone 14 Pro в усіх кольорах. Оформіть заявку — менеджер зв’яжеться з вами.">
-    <title>Iphone 14 PRO</title>
+    <meta name="description" content="Демонстраційний лендинг для портфоліо Web{LAB} Zemlianska. Не магазин: нічого не продає, не приймає платежів і не збирає персональних даних. Не пов’язаний з Apple Inc.">
+    <title>iPhone 14 Pro — демо-лендинг | Web{LAB} Zemlianska</title>
+    <link rel="alternate" hreflang="uk" href="https://iphones14pro.netlify.app/">
+    <link rel="alternate" hreflang="ru" href="https://iphones14pro.netlify.app/index.ru.html">
+    <link rel="alternate" hreflang="en" href="https://iphones14pro.netlify.app/index.eng.html">
+    <link rel="alternate" hreflang="x-default" href="https://iphones14pro.netlify.app/">
 </head>
 
 <body>
+    <div class="demo-notice" role="note" aria-label="Повідомлення про демонстраційний сайт">
+        <div class="container demo-notice__inner">
+            <span class="demo-notice__tag">Demo</span>
+            <p class="demo-notice__text"><strong>Демонстраційний проєкт для портфоліо Web{LAB}&nbsp;Zemlianska.</strong> Сайт не пов’язаний з Apple&nbsp;Inc., нічого не продає та не приймає платежів.</p>
+        </div>
+    </div>
     <header class="header fade-in">
         <div class="container">
             <nav class="nav fade-in">
@@ -35,16 +45,15 @@
                     </li>
                 </ul>   
                 <a class="nav-logo">
-                    <img class="logo-img" src="images/logo.svg" alt="логотип сайту">
+                    <img class="logo-img" src="images/logo.svg" alt="Web{LAB} Zemlianska — логотип">
                 </a>
                 <div class="nav-right">
-                    <a class="nav-phone" href="tel:+380504565656">+38 050-456-56-56</a>
                     <div class="languages">
-                        <a class="languages-item" href="">Укр</a>
+                        <a class="languages-item" href="index.html" hreflang="uk" aria-current="page">Укр</a>
                         <div class="nav-slash"></div>
-                        <a class="languages-item" href="index.ru.html">Рус</a>
+                        <a class="languages-item" href="index.ru.html" hreflang="ru">Рус</a>
                         <div class="nav-slash"></div>
-                        <a class="languages-item" href="index.eng.html">EN</a>
+                        <a class="languages-item" href="index.eng.html" hreflang="en">EN</a>
                     </div>
                 </div>
             </nav>
@@ -135,18 +144,18 @@
             <div class="container">
                 <div class="contacts-inner">
                     <div class="contacts-content">
-                        <form class="contacts-form" id="modal-form" action="#" method="post" data-form="tg">
+                        <form class="contacts-form" id="modal-form" action="#section3" data-form="demo" autocomplete="off">
                             <h2 class="contacts-title fade-in-scroll" id="section3">ХОЧЕШ IPHONE 14 PRO?</h2>
-                            <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Ваше ім'я" required>
-                            <input type="tel" name="phone" class="contacts-input fade-in-scroll" placeholder="Номер телефону" required>
-                            <select class="input-color" name="color" required>
+                            <input type="text" data-field="name" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Ваше ім'я" required>
+                            <input type="text" inputmode="tel" data-field="phone" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Номер телефону" required>
+                            <select class="input-color" data-field="color" required>
                                 <option value="" disabled selected>Обрати колір</option>
                                 <option value="silver">Сріблястий</option>
                                 <option value="dark">Темно-фіолетовий</option>
                                 <option value="gold">Золотий</option>
                                 <option value="black">Космічний чорний</option>
                             </select>
-                            <p class="contacts-text fade-in-scroll">Наш менеджер зв'яжеться з вами найближчим часом.</p>
+                            <p class="contacts-text fade-in-scroll">Демо-форма: дані перевіряються лише у вашому браузері й нікуди не надсилаються. Не вводьте реальні персональні дані.</p>
                             <button class="contacts-btn fade-in-scroll" type="submit">ЗАМОВИТИ</button>
                         </form>
                     </div>
@@ -162,56 +171,50 @@
     <footer class="footer fade-in-scroll"> 
         <div class="container">
             <div class="footer-inner">
-                <a class="footer-phone" href="tel:+380504565656">+38 050-456-56-56</a>
+                <span class="footer-phone footer-credit">Web{LAB} Zemlianska</span>
                 <a class="footer-logo">
-                    <img class="logo-img" src="images/logo.svg" alt="логотип сайту">
+                    <img class="logo-img" src="images/logo.svg" alt="Web{LAB} Zemlianska — логотип">
                 </a>
-                <a class="footer-link" href="politics-of-confident.html" target="_blank">Політика конфіденційності</a>
+                <a class="footer-link" href="politics-of-confidient.ukr.html" target="_blank" rel="noopener">Політика конфіденційності</a>
             </div>
-            <p class="footer-note">Незалежний магазин-реселер техніки. Не є офіційним представником Apple Inc. Apple та iPhone — торговельні марки Apple Inc.</p>
+            <p class="footer-note">Демонстраційний проєкт для портфоліо Web{LAB} Zemlianska. Це не магазин: товари не продаються, замовлення й платежі не приймаються, персональні дані не збираються. Сайт не пов’язаний з Apple Inc. і не схвалений нею. Apple та iPhone — торговельні марки Apple Inc., згадані лише з ілюстративною метою.</p>
         </div>
     </footer>
     <div class="mobile-menu" id="mobileMenu">
         <div class="close-btn">&times;</div>
         <ul class="mobile-menu-list">
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="#section1">Что нового</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="#section2">Цвет</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="#section3">Заказать</a></li>
+            <li class="mobile-menu-item"><a class="mobile-menu-link" href="#section1">Що нового</a></li>
+            <li class="mobile-menu-item"><a class="mobile-menu-link" href="#section2">Колір</a></li>
+            <li class="mobile-menu-item"><a class="mobile-menu-link" href="#section3">Замовити</a></li>
         </ul>
     </div>
     <div class="container">
-            <div class="modal" id="modal">
+            <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
                 <div class="modal-content">
                     <span class="close" id="closeModal">&times;</span>
-                    <form class="contacts-form" id="form" action="#" method="post" data-form="tg">
-                            <h2 class="contacts-title fade-in-scroll" id="section3">ХОЧЕШ IPHONE 14 PRO?</h2>
-                            <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Ваше ім'я" required>
-                            <input type="tel" name="phone" class="contacts-input fade-in-scroll" placeholder="Номер телефону" required>
-                            <select class="input-color" name="color" required>
+                    <form class="contacts-form" id="form" action="#section3" data-form="demo" autocomplete="off">
+                            <h2 class="contacts-title fade-in-scroll" id="modal-title">ХОЧЕШ IPHONE 14 PRO?</h2>
+                            <input type="text" data-field="name" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Ваше ім'я" required>
+                            <input type="text" inputmode="tel" data-field="phone" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Номер телефону" required>
+                            <select class="input-color" data-field="color" required>
                                 <option value="" disabled selected>Оберіть бажаний колір</option>
                                 <option value="silver">Сріблястий</option>
                                 <option value="dark">Темно-фіолетовий</option>
                                 <option value="gold">Золотий</option>
                                 <option value="black">Космічний чорний</option>
                             </select>
-                            <p class="contacts-text fade-in-scroll">Наш менеджер зв'яжеться з вами найближчим часом.</p>
+                            <p class="contacts-text fade-in-scroll">Демо-форма: дані перевіряються лише у вашому браузері й нікуди не надсилаються. Не вводьте реальні персональні дані.</p>
                             <button class="contacts-btn fade-in-scroll" type="submit">ЗАМОВИТИ</button>
                     </form>
                 </div>
             </div>
         </div>
-    <div id="success-popup" class="success-popup">
+    <div id="success-popup" class="success-popup" role="status" aria-live="polite">
         <div class="success-popup-content">
-            <p>Заявку успішно надіслано!</p>
+            <p>Демо: форма працює, але дані нікуди не надіслано.</p>
         </div>
     </div>
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
 </body>
 </html>
-
-
-
-
-
-

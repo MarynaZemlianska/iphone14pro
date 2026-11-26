@@ -59,32 +59,30 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Демо-отправка заявки: данные проверяются, но никуда не передаются
+// Демо-форма: данные проверяются в браузере и НИКУДА не передаются и не сохраняются.
+// Поля без атрибута name, у формы нет method — даже без JS отправлять нечего.
 document.addEventListener('DOMContentLoaded', () => {
-    const forms = document.querySelectorAll('form[data-form="tg"]');
+    const forms = document.querySelectorAll('form[data-form="demo"]');
     const lang = (document.documentElement.lang || 'uk').slice(0, 2);
 
     const TEXTS = {
         uk: {
-            sending: 'Надсилаємо…',
-            name: "Вкажіть, будь ласка, ваше ім'я",
-            phone: 'Перевірте номер телефону',
-            color: 'Оберіть колір зі списку',
-            error: 'Не вдалося надіслати. Спробуйте ще раз або зателефонуйте нам.'
+            checking: 'Перевіряємо…',
+            name: "Вкажіть, будь ласка, ім'я (можна вигадане)",
+            phone: 'Перевірте формат номера (можна вигаданий)',
+            color: 'Оберіть колір зі списку'
         },
         ru: {
-            sending: 'Отправляем…',
-            name: 'Укажите, пожалуйста, ваше имя',
-            phone: 'Проверьте номер телефона',
-            color: 'Выберите цвет из списка',
-            error: 'Не удалось отправить. Попробуйте ещё раз или позвоните нам.'
+            checking: 'Проверяем…',
+            name: 'Укажите, пожалуйста, имя (можно вымышленное)',
+            phone: 'Проверьте формат номера (можно вымышленный)',
+            color: 'Выберите цвет из списка'
         },
         en: {
-            sending: 'Sending…',
-            name: 'Please enter your name',
-            phone: 'Please check your phone number',
-            color: 'Please choose a colour',
-            error: 'Could not send your request. Please try again or call us.'
+            checking: 'Checking…',
+            name: 'Please enter a name (a made-up one is fine)',
+            phone: 'Please check the number format (a made-up one is fine)',
+            color: 'Please choose a colour'
         }
     };
     const t = TEXTS[lang] || TEXTS.uk;
@@ -103,45 +101,47 @@ document.addEventListener('DOMContentLoaded', () => {
         popupTimer = setTimeout(() => popup.classList.remove('show'), isError ? 5000 : 4000);
     };
 
+    const field = (form, key) => {
+        const node = form.querySelector(`[data-field="${key}"]`);
+        return node ? String(node.value || '').trim() : '';
+    };
+
     forms.forEach(form => {
-        form.addEventListener('submit', async e => {
+        form.addEventListener('submit', e => {
             e.preventDefault();
 
             const button = form.querySelector('[type="submit"]');
             if (button.disabled) return;
 
-            const formData = new FormData(form);
-            const name = String(formData.get('name') || '').trim();
-            const phone = String(formData.get('phone') || '').trim();
+            const name = field(form, 'name');
+            const phone = field(form, 'phone');
 
             if (name.length < 2) return notify(t.name, true);
             if (!/^[0-9+\-\s()]{7,20}$/.test(phone) || phone.replace(/\D/g, '').length < 7) {
                 return notify(t.phone, true);
             }
-            if (!formData.get('color')) return notify(t.color, true);
+            if (!field(form, 'color')) return notify(t.color, true);
 
             const label = button.textContent;
             button.disabled = true;
             button.classList.add('is-loading');
-            button.textContent = t.sending;
+            button.textContent = t.checking;
 
-            try {
-                // Имитация запроса к серверу — для портфолио, данные остаются в браузере
-                await new Promise(resolve => setTimeout(resolve, 900));
-
-                notify(successText);
+            // Короткая пауза только ради анимации кнопки; сетевых запросов нет
+            setTimeout(() => {
                 form.reset();
+                notify(successText);
 
                 const modal = document.getElementById('modal');
                 if (modal) {
                     modal.style.display = 'none';
                     document.body.style.overflow = '';
                 }
-            } finally {
+
                 button.disabled = false;
                 button.classList.remove('is-loading');
                 button.textContent = label;
-            }
+            }, 600);
         });
     });
 });
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.querySelector('.menu-btn');
   const mobileMenu = document.getElementById('mobileMenu');
-  const closeBtn = mobileMenu.querySelector('.close-btn'); 
+  const closeBtn = mobileMenu && mobileMenu.querySelector('.close-btn');
 
   if (menuBtn && mobileMenu) {
     menuBtn.addEventListener('click', () => {
@@ -165,31 +165,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
- //Scroll
-
- const modal = document.getElementById('modal');
-const successPopup = document.getElementById('successPopup');
-
-function openModal() {
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  modal.style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function openPopup() {
-  successPopup.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closePopup() {
-  successPopup.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-
-

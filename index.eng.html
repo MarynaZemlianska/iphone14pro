@@ -9,11 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Onest:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" href="css/animations.css">
-    <meta name="description" content="Independent electronics store: iPhone 14 Pro in every colour. Leave a request and our manager will contact you.">
-    <title>Iphone 14 PRO</title>
+    <meta name="description" content="Demo landing page from the Web{LAB} Zemlianska portfolio. Not a store: it sells nothing, takes no payments and collects no personal data. Not affiliated with Apple Inc.">
+    <title>iPhone 14 Pro — demo landing page | Web{LAB} Zemlianska</title>
+    <link rel="alternate" hreflang="uk" href="https://iphones14pro.netlify.app/">
+    <link rel="alternate" hreflang="ru" href="https://iphones14pro.netlify.app/index.ru.html">
+    <link rel="alternate" hreflang="en" href="https://iphones14pro.netlify.app/index.eng.html">
+    <link rel="alternate" hreflang="x-default" href="https://iphones14pro.netlify.app/">
 </head>
 
 <body>
+    <div class="demo-notice" role="note" aria-label="Demo site notice">
+        <div class="container demo-notice__inner">
+            <span class="demo-notice__tag">Demo</span>
+            <p class="demo-notice__text"><strong>Demo project for the Web{LAB}&nbsp;Zemlianska portfolio.</strong> This site is not affiliated with Apple&nbsp;Inc., sells nothing and accepts no payments.</p>
+        </div>
+    </div>
     <header class="header fade-in">
         <div class="container">
             <nav class="nav fade-in">
@@ -35,16 +45,15 @@
                     </li>
                 </ul>   
                 <a class="nav-logo">
-                    <img class="logo-img" src="images/logo.svg" alt="site logo">
+                    <img class="logo-img" src="images/logo.svg" alt="Web{LAB} Zemlianska logo">
                 </a>
                 <div class="nav-right">
-                    <a class="nav-phone" href="tel:+380504565656">+38 050-456-56-56</a>
                     <div class="languages">
-                        <a class="languages-item" href="">UKR</a>
+                        <a class="languages-item" href="index.html" hreflang="uk">UKR</a>
                         <div class="nav-slash"></div>
-                        <a class="languages-item" href="index.ru.html">RU</a>
+                        <a class="languages-item" href="index.ru.html" hreflang="ru">RU</a>
                         <div class="nav-slash"></div>
-                        <a class="languages-item" href="index.eng.html">EN</a>
+                        <a class="languages-item" href="index.eng.html" hreflang="en" aria-current="page">EN</a>
                     </div>
                 </div>
             </nav>
@@ -135,18 +144,18 @@
             <div class="container">
                 <div class="contacts-inner">
                     <div class="contacts-content">
-                        <form class="contacts-form" id="modal-form" action="#" method="post" data-form="tg">
+                        <form class="contacts-form" id="modal-form" action="#section3" data-form="demo" autocomplete="off">
                             <h2 class="contacts-title fade-in-scroll" id="section3">WANT IPHONE 14 PRO?</h2>
-                            <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Your Name" required>
-                            <input type="tel" name="phone" class="contacts-input fade-in-scroll" placeholder="Phone Number" required>
-                            <select class="input-color" name="color" required>
+                            <input type="text" data-field="name" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Your Name" required>
+                            <input type="text" inputmode="tel" data-field="phone" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Phone Number" required>
+                            <select class="input-color" data-field="color" required>
                                 <option value="" disabled selected>Choose Color</option>
                                 <option value="silver">Silver</option>
                                 <option value="dark">Dark Purple</option>
                                 <option value="gold">Gold</option>
                                 <option value="black">Space Black</option>
                             </select>
-                            <p class="contacts-text fade-in-scroll">Our manager will contact you shortly.</p>
+                            <p class="contacts-text fade-in-scroll">Demo form: your input is checked only in your browser and is never sent anywhere. Please do not enter real personal data.</p>
                             <button class="contacts-btn fade-in-scroll" type="submit">ORDER</button>
                         </form>
                     </div>
@@ -162,13 +171,13 @@
     <footer class="footer fade-in-scroll"> 
         <div class="container">
             <div class="footer-inner">
-                <a class="footer-phone" href="tel:+380504565656">+38 050-456-56-56</a>
+                <span class="footer-phone footer-credit">Web{LAB} Zemlianska</span>
                 <a class="footer-logo">
-                    <img class="logo-img" src="images/logo.svg" alt="site logo">
+                    <img class="logo-img" src="images/logo.svg" alt="Web{LAB} Zemlianska logo">
                 </a>
-                <a class="footer-link" href="politics-of-confident.html" target="_blank">Privacy Policy</a>
+                <a class="footer-link" href="politics-of-confidient.eng.html" target="_blank" rel="noopener">Privacy Policy</a>
             </div>
-            <p class="footer-note">Independent electronics reseller. Not affiliated with or endorsed by Apple Inc. Apple and iPhone are trademarks of Apple Inc.</p>
+            <p class="footer-note">Demo project for the Web{LAB} Zemlianska portfolio. This is not a store: no products are sold, no orders or payments are accepted and no personal data is collected. Not affiliated with or endorsed by Apple Inc. Apple and iPhone are trademarks of Apple Inc., mentioned for illustration only.</p>
         </div>
     </footer>
     <div class="mobile-menu" id="mobileMenu">
@@ -180,32 +189,32 @@
         </ul>
     </div>
     <div class="container">
-            <div class="modal" id="modal">
+            <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
                 <div class="modal-content">
                     <span class="close" id="closeModal">&times;</span>
-                    <form class="contacts-form" id="form" action="#" method="post" data-form="tg">
-                            <h2 class="contacts-title fade-in-scroll" id="section3">WANT IPHONE 14 PRO?</h2>
-                            <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Your Name" required>
-                            <input type="tel" name="phone" class="contacts-input fade-in-scroll" placeholder="Phone Number" required>
-                            <select class="input-color" name="color" required>
+                    <form class="contacts-form" id="form" action="#section3" data-form="demo" autocomplete="off">
+                            <h2 class="contacts-title fade-in-scroll" id="modal-title">WANT IPHONE 14 PRO?</h2>
+                            <input type="text" data-field="name" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Your Name" required>
+                            <input type="text" inputmode="tel" data-field="phone" autocomplete="off" class="contacts-input fade-in-scroll" placeholder="Phone Number" required>
+                            <select class="input-color" data-field="color" required>
                                 <option value="" disabled selected>Choose Desired Color</option>
                                 <option value="silver">Silver</option>
                                 <option value="dark">Dark Purple</option>
                                 <option value="gold">Gold</option>
                                 <option value="black">Space Black</option>
                             </select>
-                            <p class="contacts-text fade-in-scroll">Our manager will contact you shortly.</p>
+                            <p class="contacts-text fade-in-scroll">Demo form: your input is checked only in your browser and is never sent anywhere. Please do not enter real personal data.</p>
                             <button class="contacts-btn fade-in-scroll" type="submit">ORDER</button>
                     </form>
                 </div>
             </div>
         </div>
-    <div id="success-popup" class="success-popup">
+    <div id="success-popup" class="success-popup" role="status" aria-live="polite">
         <div class="success-popup-content">
-            <p>Your request has been successfully sent!</p>
+            <p>Demo: the form works, but nothing was sent.</p>
         </div>
     </div>
-     <script src="/js/main.js"></script>
-     <script src="/js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
