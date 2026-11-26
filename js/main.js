@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Отправка заявки (Netlify Function → Telegram)
+// Отправка заявки (Netlify Forms)
 document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('form[data-form="tg"]');
     const lang = (document.documentElement.lang || 'uk').slice(0, 2);
@@ -110,8 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = form.querySelector('[type="submit"]');
             if (button.disabled) return;
 
-            const data = Object.fromEntries(new FormData(form));
-            data.lang = lang;
+            const formData = new FormData(form);
+            const name = String(formData.get('name') || '').trim();
+            const phone = String(formData.get('phone') || '').trim();
+
+            if (name.length < 2) return notify(t.name, true);
+            if (!/^[0-9+\-\s()]{7,20}$/.test(phone) || phone.replace(/\D/g, '').length < 7) {
+                return notify(t.phone, true);
+            }
+            if (!formData.get('color')) return notify(t.color, true);
 
             const label = button.textContent;
             button.disabled = true;
@@ -119,14 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
             button.textContent = t.sending;
 
             try {
-                const res = await fetch('/api/order', {
+                const res = await fetch('/', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
                 });
-                const result = await res.json().catch(() => ({}));
 
-                if (res.ok && result.ok) {
+                if (res.ok) {
                     notify(successText);
                     form.reset();
 
@@ -136,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.body.style.overflow = '';
                     }
                 } else {
-                    notify(t[result.error] || t.error, true);
+                    notify(t.error, true);
                 }
             } catch (err) {
                 console.error(err);

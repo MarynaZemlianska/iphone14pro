@@ -135,7 +135,9 @@
             <div class="container">
                 <div class="contacts-inner">
                     <div class="contacts-content">
-                        <form class="contacts-form" id="modal-form" action="/api/order" method="post" data-form="tg">
+                        <form class="contacts-form" id="modal-form" name="order" action="/" method="post" data-form="tg" data-netlify="true" netlify-honeypot="company">
+                            <input type="hidden" name="form-name" value="order">
+                            <input type="hidden" name="lang" value="uk">
                             <input type="text" name="company" class="fx-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <h2 class="contacts-title fade-in-scroll" id="section3">ХОЧЕШ IPHONE 14 PRO?</h2>
                             <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Ваше ім'я" required>
@@ -184,7 +186,9 @@
             <div class="modal" id="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModal">&times;</span>
-                    <form class="contacts-form" id="form" action="/api/order" method="post" data-form="tg">
+                    <form class="contacts-form" id="form" name="order" action="/" method="post" data-form="tg" data-netlify="true" netlify-honeypot="company">
+                            <input type="hidden" name="form-name" value="order">
+                            <input type="hidden" name="lang" value="uk">
                             <input type="text" name="company" class="fx-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <h2 class="contacts-title fade-in-scroll" id="section3">ХОЧЕШ IPHONE 14 PRO?</h2>
                             <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Ваше ім'я" required>
