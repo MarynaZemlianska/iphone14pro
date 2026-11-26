@@ -1,20 +1,3 @@
-<!--<?php
-/* Настройки cookie для сессии — ВАЖНО: до session_start() */
-session_set_cookie_params([
-  'lifetime' => 0,
-  'path' => '/',
-  'secure' => true,    // требует HTTPS
-  'httponly' => true,  // защита от XSS
-  'samesite' => 'Strict' // защита от CSRF
-]);
-session_start();
-
-/* Генерируем CSRF токен один раз на сессию */
-if (empty($_SESSION['csrf_token'])) {
-  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-?>-->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,6 +5,11 @@ if (empty($_SESSION['csrf_token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Onest:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="css/animations.css">
+    <meta name="description" content="Независимый магазин техники: iPhone 14 Pro во всех цветах. Оставьте заявку — менеджер свяжется с вами.">
     <title>Iphone 14 PRO</title>
 </head>
 
@@ -147,8 +135,8 @@ if (empty($_SESSION['csrf_token'])) {
             <div class="container">
                 <div class="contacts-inner">
                     <div class="contacts-content">
-                        <form class="contacts-form" id="modal-form" action="send.php" method="post" data-form="tg">
-                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        <form class="contacts-form" id="modal-form" action="/api/order" method="post" data-form="tg">
+                            <input type="text" name="company" class="fx-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <h2 class="contacts-title fade-in-scroll" id="section3">ХОЧЕШЬ IPHONE 14 PRO?</h2>
                             <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Ваше имя" required>
                             <input type="tel" name="phone" class="contacts-input fade-in-scroll" placeholder="Номер телефона" required>
@@ -181,6 +169,7 @@ if (empty($_SESSION['csrf_token'])) {
                 </a>
                 <a class="footer-link" href="politics-of-confident.html" target="_blank">Политика конфиденциальности</a>
             </div>
+            <p class="footer-note">Независимый магазин-реселлер техники. Не является официальным представителем Apple Inc. Apple и iPhone — товарные знаки Apple Inc.</p>
         </div>
     </footer>
     <div class="mobile-menu" id="mobileMenu">
@@ -195,8 +184,8 @@ if (empty($_SESSION['csrf_token'])) {
             <div class="modal" id="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModal">&times;</span>
-                    <form class="contacts-form" id="form" action="send.php" method="post" data-form="tg">
-                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                    <form class="contacts-form" id="form" action="/api/order" method="post" data-form="tg">
+                            <input type="text" name="company" class="fx-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <h2 class="contacts-title fade-in-scroll" id="section3">ХОЧЕШЬ IPHONE 14 PRO?</h2>
                             <input type="text" name="name" class="contacts-input fade-in-scroll" placeholder="Ваше имя" required>
                             <input type="tel" name="phone" class="contacts-input fade-in-scroll" placeholder="Номер телефона" required>
@@ -219,5 +208,6 @@ if (empty($_SESSION['csrf_token'])) {
         </div>
     </div>
      <script src="/js/main.js"></script>
+     <script src="/js/animations.js"></script>
 </body>
 </html>

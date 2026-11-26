@@ -59,48 +59,93 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Отправка данных на телеграм
+// Отправка заявки (Netlify Function → Telegram)
 document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('form[data-form="tg"]');
+    const lang = (document.documentElement.lang || 'uk').slice(0, 2);
+
+    const TEXTS = {
+        uk: {
+            sending: 'Надсилаємо…',
+            name: "Вкажіть, будь ласка, ваше ім'я",
+            phone: 'Перевірте номер телефону',
+            color: 'Оберіть колір зі списку',
+            error: 'Не вдалося надіслати. Спробуйте ще раз або зателефонуйте нам.'
+        },
+        ru: {
+            sending: 'Отправляем…',
+            name: 'Укажите, пожалуйста, ваше имя',
+            phone: 'Проверьте номер телефона',
+            color: 'Выберите цвет из списка',
+            error: 'Не удалось отправить. Попробуйте ещё раз или позвоните нам.'
+        },
+        en: {
+            sending: 'Sending…',
+            name: 'Please enter your name',
+            phone: 'Please check your phone number',
+            color: 'Please choose a colour',
+            error: 'Could not send your request. Please try again or call us.'
+        }
+    };
+    const t = TEXTS[lang] || TEXTS.uk;
+
+    const popup = document.getElementById('success-popup');
+    const popupText = popup && popup.querySelector('p');
+    const successText = popupText ? popupText.textContent : 'OK';
+    let popupTimer;
+
+    const notify = (message, isError = false) => {
+        if (!popup || !popupText) return;
+        popupText.textContent = message;
+        popup.classList.toggle('is-error', isError);
+        popup.classList.add('show');
+        clearTimeout(popupTimer);
+        popupTimer = setTimeout(() => popup.classList.remove('show'), isError ? 5000 : 4000);
+    };
 
     forms.forEach(form => {
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', async e => {
             e.preventDefault();
 
-            const formData = new FormData(form);
+            const button = form.querySelector('[type="submit"]');
+            if (button.disabled) return;
 
-            fetch('send.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.text())
-            .then(result => {
-                if (result.trim() === 'success') {
-                    
-                    const successPopup = document.getElementById('success-popup');
-                    if (successPopup) {
-                        successPopup.classList.add('show');
-                        setTimeout(() => {
-                            successPopup.classList.remove('show');
-                        }, 4000);
-                    }
+            const data = Object.fromEntries(new FormData(form));
+            data.lang = lang;
+
+            const label = button.textContent;
+            button.disabled = true;
+            button.classList.add('is-loading');
+            button.textContent = t.sending;
+
+            try {
+                const res = await fetch('/api/order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json().catch(() => ({}));
+
+                if (res.ok && result.ok) {
+                    notify(successText);
+                    form.reset();
 
                     const modal = document.getElementById('modal');
                     if (modal) {
                         modal.style.display = 'none';
                         document.body.style.overflow = '';
                     }
-
-                    
-                    form.reset();
                 } else {
-                    alert('Ошибка отправки!');
+                    notify(t[result.error] || t.error, true);
                 }
-            })
-            .catch(err => {
-                alert('Ошибка!');
+            } catch (err) {
                 console.error(err);
-            });
+                notify(t.error, true);
+            } finally {
+                button.disabled = false;
+                button.classList.remove('is-loading');
+                button.textContent = label;
+            }
         });
     });
 });
@@ -151,5 +196,4 @@ function closePopup() {
 }
 
 
-console.log('Submit обработан');
 
