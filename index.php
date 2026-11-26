@@ -22,6 +22,10 @@ if (empty($_SESSION['csrf_token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Onest:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="css/animations.css">
     <title>Iphone 14 PRO</title>
 </head>
 
@@ -219,6 +223,7 @@ if (empty($_SESSION['csrf_token'])) {
         </div>
     </div>
     <script src="js/main.min.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
 
