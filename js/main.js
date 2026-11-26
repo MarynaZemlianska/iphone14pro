@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Отправка заявки (Netlify Forms)
+// Демо-отправка заявки: данные проверяются, но никуда не передаются
 document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('form[data-form="tg"]');
     const lang = (document.documentElement.lang || 'uk').slice(0, 2);
@@ -126,27 +126,17 @@ document.addEventListener('DOMContentLoaded', () => {
             button.textContent = t.sending;
 
             try {
-                const res = await fetch('/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
-                });
+                // Имитация запроса к серверу — для портфолио, данные остаются в браузере
+                await new Promise(resolve => setTimeout(resolve, 900));
 
-                if (res.ok) {
-                    notify(successText);
-                    form.reset();
+                notify(successText);
+                form.reset();
 
-                    const modal = document.getElementById('modal');
-                    if (modal) {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = '';
-                    }
-                } else {
-                    notify(t.error, true);
+                const modal = document.getElementById('modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
                 }
-            } catch (err) {
-                console.error(err);
-                notify(t.error, true);
             } finally {
                 button.disabled = false;
                 button.classList.remove('is-loading');
