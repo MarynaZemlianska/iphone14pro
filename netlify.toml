@@ -1,6 +1,12 @@
 [build]
   publish = "."
 
+# Браузеры и боты запрашивают /favicon.ico напрямую
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/favicon-32.png"
+  status = 200
+
 # Служебные файлы проекта не должны отдаваться как часть сайта
 [[redirects]]
   from = "/package.json"
